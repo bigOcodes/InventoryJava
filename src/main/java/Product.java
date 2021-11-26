@@ -3,6 +3,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.util.*;
+import static java.sql.DriverManager.registerDriver;
 
 
 /*
@@ -23,6 +24,7 @@ public class Product extends javax.swing.JFrame {
     public Product() {
         initComponents();
         SelectProd();
+        GetCat();
     }
 
     /**
@@ -307,7 +309,32 @@ public class Product extends javax.swing.JFrame {
             st = con.createStatement();
             rs = st.executeQuery("select * from PRODUCTLIST");
 //            productTable.setModel(DbUtils.resultSetToTableModel(rs));
+//            while(rs.next()){
+//                String pid = String.valueOf(rs.getInt(1));
+//                String pname = rs.getString(2);
+//                String quant = String.valueOf(rs.getInt(3));
+//                String pcategory = rs.getString(4);
+//                String desc = rs.getString(5);
+//                
+//                String[] data = {pid,pname,quant,pcategory,desc};
+//                DefaultTableModel model = (DefaultTableModel)productTable.getModel();
+//                model.addRow(data);
+//            }
         }catch(SQLException e){
+            e.printStackTrace();
+        }
+    }
+    private void GetCat(){
+        try{
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/Inventory","pravakar","pravakar8523");
+            st = con.createStatement();
+            String query = "select * from pravakar.CATEGORYTBL";
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                String MyCat = rs.getString("CATNAME");
+                productCategory.addItem(MyCat);
+            }
+        }catch(Exception e){
             e.printStackTrace();
         }
     }
@@ -409,7 +436,7 @@ public class Product extends javax.swing.JFrame {
 
     private void HomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomeMouseClicked
         // TODO add your handling code here:
-        new Login().setVisible(true);
+        new HomeForm().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_HomeMouseClicked
 

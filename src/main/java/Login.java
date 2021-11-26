@@ -1,3 +1,10 @@
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -16,7 +23,10 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
     }
-
+    
+    Connection con = null;
+    Statement st = null;
+    ResultSet rs = null;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -96,9 +106,14 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 102, 102));
         jLabel4.setText("clear");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -137,7 +152,7 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(loginButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addGap(0, 61, Short.MAX_VALUE))
+                .addGap(0, 58, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -162,8 +177,31 @@ public class Login extends javax.swing.JFrame {
 
     private void loginButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginButtonMouseClicked
         // TODO add your handling code here:
-        if()
+        if(uid.getText().isEmpty()||upassword.getText().isEmpty()){
+            JOptionPane.showMessageDialog(this,"username and password not found");
+        }else{
+            String Query = "select * from PRAVAKAR.USERTBL, where UNAME ='"+uid.getText()+"' and UPASS = '"+upassword.getText()+"'";
+        try{
+            con = DriverManager.getConnection("jdbc:derby://localhost:1527/Inventory","pravakar","pravakar8523");
+            st = con.createStatement();
+            rs = st.executeQuery(Query);
+            if(rs.next()){
+                new HomeForm().setVisible(true);
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(this, "Invalid Username and Password");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        }
     }//GEN-LAST:event_loginButtonMouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        // TODO add your handling code here:
+        uid.setText("");
+        upassword.setText("");
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments

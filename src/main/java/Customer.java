@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -185,6 +186,11 @@ public class Customer extends javax.swing.JFrame {
                 "Customer ID", "Customer Name", "Phone"
             }
         ));
+        custTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                custTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(custTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -350,7 +356,7 @@ public class Customer extends javax.swing.JFrame {
 
     private void homeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeMouseClicked
         // TODO add your handling code here:
-        new Login().setVisible(true);
+        new HomeForm().setVisible(true);
         this.dispose();
     }//GEN-LAST:event_homeMouseClicked
 
@@ -358,6 +364,15 @@ public class Customer extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void custTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_custTableMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel)custTable.getModel();
+        int Myindex = custTable.getSelectedRow();
+        cId.setText(model.getValueAt(Myindex, 0).toString());
+        cName.setText(model.getValueAt(Myindex, 1).toString());
+        phone.setText(model.getValueAt(Myindex, 2).toString());
+    }//GEN-LAST:event_custTableMouseClicked
 
     /**
      * @param args the command line arguments
