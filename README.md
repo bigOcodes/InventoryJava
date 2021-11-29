@@ -1,4 +1,4 @@
-# InventoryJava
+# Inventorying
 
 Description - 
 Inventory management system for godowns, warehouses, factories etc. A java based GUI software can be manage inventory system(customers list, users list, products list, orders list). it will help to end users to operate all inventory management from one place, a tabular forms are using to manage lists and has user control with login credentials. 
