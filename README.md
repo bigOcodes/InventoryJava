@@ -12,3 +12,7 @@ environent(IDE) -
 - NetBeans
 
 for database you can use any one(oracle, mysql, db[java]) but first you need to install driver for these database which one you will use.
+
+![Screenshot (11)](https://user-images.githubusercontent.com/61041599/143853594-ad8a7ef7-4073-49ba-a537-61f7bcb185fc.jpg)
+![Screenshot (10)](https://user-images.githubusercontent.com/61041599/143853668-ffee0653-5be2-4751-82a1-c8631f514704.png)
+![Screenshot (16)](https://user-images.githubusercontent.com/61041599/143853675-35e7ef9a-162f-4b2d-a677-17b0a62cb537.png)
